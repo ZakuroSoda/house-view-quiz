@@ -4,6 +4,7 @@ import type { Question, Answer } from './quiz';
 import { Option } from './option';
 import { ProgressDots } from './progressDots';
 import { CategoryPointsFooter } from './categoryPointsFooter';
+// import { QuizScoreGraph } from './quizScoreGraph';
 
 export function QuizView({
   quizData
@@ -17,6 +18,7 @@ export function QuizView({
   const [score, setScore] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [multiplier, setMultiplier] = useState(1);
+  // const [showGraph, setShowGraph] = useState(false);
   const [answeredQuestions, setAnsweredQuestions] = useState<Answer[]>([]);
 
   const currentQuestion = quizData[currentQuestionIndex];
@@ -45,6 +47,7 @@ export function QuizView({
       id: currentQuestion.id,
       selected: selectedOption,
       points: pointsToAdd,
+      multiplier: 1
     }]);
 
     // Transition to next question after 1500 flash answer
@@ -54,7 +57,10 @@ export function QuizView({
       setTimeout(() => {
         if (currentQuestionIndex < quizData.length - 1) {
           setCurrentQuestionIndex(prevIndex => prevIndex + 1);
-        }
+        } 
+        // else {
+        //   setShowGraph(true); // Show graph if it's the last question
+        // }
         setSelectedOption(null);
         setIsCorrect(null);
         setTransitioning(false);
@@ -68,7 +74,7 @@ export function QuizView({
       {/* --- Top line with progress dots, title, and score --- */}
       <div className="flex justify-between items-center w-full mb-6">
         <div className="flex">
-          <ProgressDots 
+          <ProgressDots
             quizData={quizData}
             answeredQuestions={answeredQuestions}
             currentQuestionIndex={currentQuestionIndex}
@@ -133,7 +139,13 @@ export function QuizView({
         </div>
       </div>
       {/* ------ */}
-
+      {/* {showGraph ?
+        <QuizScoreGraph
+          answers={answeredQuestions}
+          finalScore={40}
+        />
+        : null
+      } */}
     </div>
   );
 }

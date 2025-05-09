@@ -1,7 +1,8 @@
 import type { Route } from "./+types/home";
-import { Quiz } from "../quiz/quiz";
-
-export function meta({}: Route.MetaArgs) {
+import Hero from "~/home/hero";
+import FeaturesSection from "~/home/featuresSection";
+import StatsSection from "~/home/statsSection";
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "The House View Quiz" },
     { name: "description", content: "A finance quiz infused with risk management principles" },
@@ -9,5 +10,9 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <Quiz />;
+  return <div className="min-h-screen w-full">
+    <Hero />
+    <FeaturesSection />
+    <StatsSection />
+  </div>
 }

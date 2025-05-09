@@ -114,4 +114,5 @@ export type Answer = {
   id: number;
   selected: string | null;
   points: number;
+  multiplier: number;
 }
