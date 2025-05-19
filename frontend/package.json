@@ -2,9 +2,10 @@
   "name": "the-house-view-quiz",
   "private": true,
   "type": "module",
+  "proxy": "http://localhost:5000",
   "scripts": {
     "build": "react-router build",
-    "dev": "react-router dev",
+    "dev": "react-router dev --host",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc"
   },

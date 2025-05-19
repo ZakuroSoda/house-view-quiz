@@ -7,13 +7,26 @@ export default function GoogleSignInButton({onMobile}:{onMobile: boolean}) {
       <GoogleLogin
         onSuccess={credentialResponse => {
           console.log(credentialResponse);
-          /*
-          TODO: 
-          if the user exists in db, log them in
-          if the user does not exist in db, create a new user
-          response returns session token cookie
-          set the session token cookie in the browser
-          */
+          fetch('http://localhost:5000/api/auth/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(credentialResponse),
+          })
+            .then(response => {
+              if (response.ok) {
+                console.log('Login Successful');
+                return response.text();
+              } else {
+                throw new Error('Login Failed');
+              }
+            }).then(data => {
+              console.log('Response:', data);
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
         }}
         onError={() => {
           console.log('Login Failed');

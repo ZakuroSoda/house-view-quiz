@@ -68,7 +68,7 @@ def handle_login(sub: str, email: str, name: str) -> str:
 
     return session_token
 
-@login_bp.route(f"/", methods=["POST"])
+@login_bp.route(f"", methods=["POST"])
 def login():
     class GoogleCredentialResponse(TypedDict):
         credential: str
